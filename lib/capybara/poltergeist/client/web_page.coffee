@@ -1,7 +1,7 @@
 class Poltergeist.WebPage
   @CALLBACKS = ['onConsoleMessage','onError',
                 'onLoadFinished', 'onInitialized', 'onLoadStarted',
-                'onResourceRequested', 'onResourceReceived', 'onResourceError',
+                'onResourceRequested', 'onResourceRedirect', 'onResourceReceived', 'onResourceError',
                 'onNavigationRequested', 'onUrlChanged', 'onPageCreated',
                 'onClosing']
 
@@ -117,6 +117,11 @@ class Poltergeist.WebPage
       }
 
       @_requestedResources[request.id] = request.url
+    return true
+
+  onResourceRedirectNative: (redirect) ->
+    @_networkTraffic[redirect.id]?.responseParts.push { redirectURL: redirect.url }
+    @redirectURL = @normalizeURL(redirect.url) if @requestId == redirect.id
     return true
 
   onResourceReceivedNative: (response) ->
