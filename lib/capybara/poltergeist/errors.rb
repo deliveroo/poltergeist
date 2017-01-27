@@ -14,9 +14,9 @@ module Capybara
     class JSErrorItem
       attr_reader :message, :stack
 
-      def initialize(message, stack)
-        @message = message
-        @stack   = stack
+      def initialize(*args)
+        @message = args[0] || "missing message"
+        @stack   = args[1] || "missing stack"
       end
 
       def to_s
