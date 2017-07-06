@@ -50,7 +50,10 @@ module Capybara
           "If you don't care about these errors, you can ignore them by " \
           "setting js_errors: false in your Poltergeist configuration (see " \
           "documentation for details)." \
-          "\n\n#{javascript_errors.map(&:to_s).join("\n")}"
+          "\n\n#{javascript_errors.map(&:to_s).join("\n")}" \
+          "\n\n\"E N H A N C E D  D E B U G G I N G:\"" \
+          "\n\n#{response}" \
+          "\n\n#{data}"
       end
     end
 
